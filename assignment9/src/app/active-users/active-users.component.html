@@ -1,0 +1,7 @@
+<h3>Active Users</h3>
+<ul class="list-group">
+  <li class="list-group-item"
+      *ngFor="let user of users; let id = index">
+    {{user}} | <a href="#" (click)="onSetToInactive(id)">Set to Active</a>
+  </li>
+</ul>
