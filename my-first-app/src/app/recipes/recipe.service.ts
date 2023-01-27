@@ -1,19 +1,38 @@
-import {Recipe} from "./recipe.model";
-import {EventEmitter, Output} from "@angular/core";
+import { EventEmitter, Injectable } from '@angular/core';
 
+import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+
+@Injectable()
 export class RecipeService {
-
-  testRecipeImagePath: string[] = ['https://bbqgrillandsmoke.com/wp-content/uploads/2022/08/Grilled-Sandwich-Recipe-2-735x490.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZnZkz7iXV8svhMdt8z4DL3iVd-_qYhlqb_w&usqp=CAU'];
+  recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
-    new Recipe('Sandwich', 'Cheese Sandwich', this.testRecipeImagePath[0]),
-    new Recipe('Custard', 'Cold desert', this.testRecipeImagePath[1])
+    new Recipe(
+      'Tasty Schnitzel',
+      'A super-tasty Schnitzel - just awesome!',
+      'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+      [
+        new Ingredient('Meat', 1),
+        new Ingredient('French Fries', 20)
+      ]),
+    new Recipe('Big Fat Burger',
+      'What else you need to say?',
+      'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
+      [
+        new Ingredient('Buns', 2),
+        new Ingredient('Meat', 1)
+      ])
   ];
 
-  recipeSelected = new EventEmitter<Recipe>();
+  constructor(private slService: ShoppingListService) {}
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
   }
 }

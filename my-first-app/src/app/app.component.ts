@@ -6,10 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  loadedFeature = 'recipe';
 
-  currentViewName: string = "recipes";
-
-  switchView(event: {viewName: string}) {
-    this.currentViewName = event.viewName;
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
   }
 }

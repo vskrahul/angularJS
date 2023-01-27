@@ -1,20 +1,13 @@
-import {Component, Output, EventEmitter, OnInit} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  @Output() featureSelected = new EventEmitter<string>();
 
-  constructor() {
-  }
-  ngOnInit() {
-  }
-
-  @Output() displayEvent = new EventEmitter<{viewName: string}>();
-
-  onSelect(viewNameSelected: string) {
-    this.displayEvent.emit({viewName: viewNameSelected});
+  onSelect(feature: string) {
+    this.featureSelected.emit(feature);
   }
 }

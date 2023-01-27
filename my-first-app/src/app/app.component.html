@@ -1,15 +1,9 @@
+<app-header (featureSelected)="onNavigate($event)"></app-header>
 <div class="container">
   <div class="row">
-    <app-header
-      (displayEvent)="switchView($event)"></app-header>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h3>I'm in the AppComponent</h3>
-      <hr>
-      <!--<app-recipes *ngIf="currentViewName === 'recipes'"></app-recipes>-->
-      <app-recipes *customIf="currentViewName === 'recipes'"></app-recipes>
-      <app-shopping-list *ngIf="currentViewName === 'shoppingList'"></app-shopping-list>
+    <div class="col-md-12">
+      <app-recipes *ngIf="loadedFeature === 'recipe'"></app-recipes>
+      <app-shopping-list *ngIf="loadedFeature !== 'recipe'"></app-shopping-list>
     </div>
   </div>
 </div>
