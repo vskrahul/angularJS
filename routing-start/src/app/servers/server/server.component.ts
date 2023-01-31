@@ -14,17 +14,17 @@ export class ServerComponent implements OnInit {
   paramSubscription: Subscription;
 
   constructor(private serversService: ServersService,
-              private route: ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private router: Router) {
 
   }
 
   _ngOnInit() {
-    const id = +this.route.snapshot.params['id'];
+    const id = +this.activatedRoute.snapshot.params['id'];
     console.log('id = ' + id);
     if(id && !isNaN(id)) {
       console.log('valid id');
-      this.paramSubscription = this.route.params.subscribe(
+      this.paramSubscription = this.activatedRoute.params.subscribe(
         (params: Params) => {
           this.server = this.serversService.getServer(+params['id']);
           console.log(this.server);
@@ -40,19 +40,20 @@ export class ServerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data
+    this.activatedRoute.data
       .subscribe(
         (data: Data) => {
+          console.log('activated route data = ' + JSON.stringify(data));
           this.server = data['server'];
         }
       )
   }
 
   onEdit() {
-    let pr = this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: "preserve"});
+    let pr = this.router.navigate(['edit'], {relativeTo: this.activatedRoute, queryParamsHandling: "preserve"});
     pr.then((v) => {
-      console.log(this.route.snapshot.pathFromRoot);
-      console.log(this.route.queryParams)
+      console.log(this.activatedRoute.snapshot.pathFromRoot);
+      console.log(this.activatedRoute.queryParams)
     }).catch((err) => console.error(err));
   }
 

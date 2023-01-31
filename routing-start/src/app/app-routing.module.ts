@@ -12,7 +12,7 @@ import {ErrorPageComponent} from "./error-page/error-page.component";
 import {ServerResolverService} from "./servers/server/server-resolver.service";
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'users', component: UsersComponent, children: [
       {path: ':id', component: UserComponent}
     ]
@@ -22,13 +22,14 @@ const appRoutes: Routes = [
       {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]}
     ]
   },
+  //{path: 'lazy', loadChildren: () => import('').then(mod => mod.LazyModule)},
   {path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'}},
   {path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes, {useHash: true})
+    RouterModule.forRoot(appRoutes, {useHash: false})
   ],
   exports: [
     // what should be accessible from this module

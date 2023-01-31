@@ -13,22 +13,13 @@ export class ServersComponent implements OnInit {
 
   constructor(private serversService: ServersService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.servers = this.serversService.getServers();
   }
   onReload() {
-    this.promise = this.router.navigate(['/servers'], {relativeTo: this.route});
-    this.promise.then((navigated: Boolean) => {
-      if(navigated) {
-        console.log('navigated to /servers');
-      } else {
-        console.log('failed to navigate to /servers');
-      }
-    }).catch((error) => {
-      console.error('error while navigating to /servers' + error);
-    });
+    this.router.navigate(['servers'], {relativeTo: this.activatedRoute});
   }
 
 }

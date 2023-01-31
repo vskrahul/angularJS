@@ -19,26 +19,26 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   changesSaved = false;
 
   constructor(private serversService: ServersService,
-              private route: ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private router: Router) {
 
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot.queryParams);
-    console.log(this.route.snapshot.fragment);
+    console.log(this.activatedRoute.snapshot.queryParams);
+    console.log(this.activatedRoute.snapshot.fragment);
 
-    this.route.queryParams.subscribe(
+    this.activatedRoute.queryParams.subscribe(
       (queryParams: Params) => {
         console.log('EditComponent, queryParams: ' + JSON.stringify(queryParams));
         this.allowEdit = queryParams['allowEdit'] === '1';
       }
     );
 
-    this.route.queryParams.subscribe();
-    this.route.fragment.subscribe();
+    this.activatedRoute.queryParams.subscribe();
+    this.activatedRoute.fragment.subscribe();
 
-    const id = +this.route.snapshot.params['id'];
+    const id = +this.activatedRoute.snapshot.params['id'];
 
     this.server = this.serversService.getServer(id);
     // Subscribe route params to update the id if params change
@@ -59,7 +59,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   onUpdateServer() {
     this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
     this.changesSaved = true;
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }
 
 }
