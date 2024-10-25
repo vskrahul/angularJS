@@ -1,0 +1,35 @@
+<app-header></app-header>
+<br /><br />
+<span>{{ title }} app is running!</span>
+
+<div [ngClass]="counter%2 === 0 ? 'green' : 'yellow'">
+    Counter: {{counter}}
+    <button (click)="incrementCouter()">Click Me</button>
+</div>
+
+<br /><br />
+
+<!-- <app-user [id]="'fakeid'" requiredInputSignal="fake"></app-user> -->
+
+<main>
+    <ul>
+        <!-- <li *ngFor="let user of users">
+            <app-user 
+                requiredInputSignal="fake" 
+                [user]="user"
+                (selectMe)="onSelectUser($event)"
+            ></app-user>
+        </li> -->
+
+        @for (user of users; track user.id) {
+            <li>
+                <app-user 
+                    requiredInputSignal="fake" 
+                    [user]="user"
+                    (selectMe)="onSelectUser($event)"
+                ></app-user>
+            </li>
+        }
+        <app-task [user]="selectedUser"></app-task>
+    </ul>
+</main>

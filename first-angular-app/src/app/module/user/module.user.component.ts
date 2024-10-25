@@ -4,10 +4,10 @@ import { DUMMY_USERS } from "../../dummy-users";
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 @Component({
-    selector: 'app-user',
+    selector: 'module-app-user',
     standalone: false,
-    templateUrl: './user.component.html'
+    templateUrl: './module.user.component.html'
   })
-export class UserComponent{
+export class ModuleUserComponent{
   selectedUser = DUMMY_USERS[randomIndex];
 }

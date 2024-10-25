@@ -1,0 +1,25 @@
+<div>
+
+    <!-- <p>input from current component using "Signal"</p>
+    <button (click)="selectUser()">
+        <img 
+        [src]="imagePath()" 
+        [alt]="selectedUser().name"
+        width="40" height="55"/>
+        
+        <span>Name of User: {{ selectedUser().name }}</span>
+    </button> -->
+
+    <!-- input from parent component-->
+    <!-- <p>Input from Paraent component</p> -->
+    <button (click)="selectUser()">
+        <img 
+        [src]="imagePathFromInputSignal()" 
+        [alt]="user?.name"
+        width="40" height="55"/>
+        
+        <span>Name of User: {{ user?.name }}</span>
+    </button>
+
+
+</div>
